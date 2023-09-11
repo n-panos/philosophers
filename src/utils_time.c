@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads_odds.c                                     :+:      :+:    :+:   */
+/*   utils_time.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/04 13:11:39 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/04 13:12:11 by ipanos-o         ###   ########.fr       */
+/*   Created: 2023/09/04 10:55:03 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/09/04 11:03:27 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
-	/*if (ret == 0 && args->philos > 0 && args->philos % 2 == 0)
-		ft_pair_threads(args, ret);
-	else if (ret == 0 && args->philos > 0 && args->philos % 2 == 1)
-		ft_odd_threads(args, ret);
-
-int	ft_odd_threads(t_prg *prg, int error)
+long int	ft_get_time(void)
 {
-	int	i;
+	long int		time;
+	struct timeval	current_time;
 
-	if (error != 0)
-		return (error);
-	i = 1;
-	while (i <= prg->philos)
-	{
-		ft_create_thread(i);
-		i++;
-	}
-	return (0);
+	time = 0;
+	if (gettimeofday(&current_time, NULL) == -1)
+		return (-1);
+	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
+	return (time);
 }
-*/
+
+void	ft_sleep(long int time_in_ms)
+{
+	long int	start_time;
+
+	//start_time = 0;
+	start_time = ft_get_time();
+	while ((ft_get_time() - start_time) < time_in_ms)
+		usleep(time_in_ms / 10);
+}
