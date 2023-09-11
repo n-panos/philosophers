@@ -3,7 +3,7 @@
 NAME		= philo
 
 SRC			= src/philo.c src/parse.c src/utils.c src/exit.c \
-			src/threads_pairs.c src/threads_odds.c src/threads_utils.c 
+			src/threads_utils.c
 
 OBJS		= ${SRC:.c=.o}
 HEADER		= -Iheader
