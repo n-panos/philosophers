@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 12:44:10 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/06 13:16:47 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/08 13:58:26 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,21 @@ int	ft_create_philos(t_prg *prg)
 		ph[i].p_arg = &prg->args;
 		i++;
 	}
-	//ft_create_forks(prg, prg->ph[i]);
-	ft_putstr_fd("\nAqui llegamos\n", 1);
+	//ft_create_eat_forks(prg, prg->ph[i]);
 	i = 0;
 	while (i < prg->args.philos)
 	{
 		ft_create_thread(&prg->ph[i]);
 		i++;
 	}
+	ft_sleep(200);
 	ft_end_threads(prg->ph, prg->args.philos);
 	return (0);
 }
 
 //				(fork - sizeof(pthread_mutex_t));
 
-int	ft_create_forks(t_prg *prg, t_philo philo)
+int	ft_create_eat_forks(t_prg *prg, t_philo philo)
 {
 	pthread_mutex_t	*fork;
 	int				i;
@@ -76,8 +76,7 @@ int	ft_create_thread(void *v_philo)
 	t_philo	*philo;
 
 	philo = (t_philo *)v_philo;
-	if (pthread_create(&philo->thread_id, NULL, &ft_philo_routine, \
-	v_philo))
+	if (pthread_create(&philo->thread_id, NULL, &ft_philo_routine, v_philo))
 		return (1);
 	return (0);
 }
@@ -85,28 +84,29 @@ int	ft_create_thread(void *v_philo)
 void	*ft_philo_routine(void *v_philo)
 {
 	t_philo	*philo;
+	long int	i;
 
 	philo = (t_philo *)v_philo;
-	pthread_mutex_lock(&philo->p_arg->write_mutex);
-	ft_putstr_fd("\nThis is philo number ", 1);
-	ft_putnbr_fd(philo->id, 1);
-	ft_putstr_fd("\n", 1);
-	pthread_mutex_unlock(&philo->p_arg->write_mutex);
+	pthread_mutex_lock(&philo->p_arg->writer);
+	i = ft_get_time() - philo->p_arg->start_time;
+	printf("\nThis is philo number %d, time is: %ld\n", philo->id, i);
+	//pthread_mutex_unlock(&philo->p_arg->write_mutex);
+	ft_sleep(200);
+	//pthread_mutex_lock(&philo->p_arg->write_mutex);
+	i = ft_get_time() - philo->p_arg->start_time;
+	printf("\nThis is again philo number %d, time is: %ld\n", philo->id, i);
+	pthread_mutex_unlock(&philo->p_arg->writer);
 	/*if (philo->id == 2)
 	{
 		pthread_mutex_lock(philo->l_fork);
-		ft_putstr_fd("\nPhilo number ", 1);
-		ft_putnbr_fd(philo->id, 1);
-		ft_putstr_fd(" grabing left Fork\n", 1);
+		printf("\nPhilo number %d grabing left Fork\n", philo->id);
 		sleep(2);
 		pthread_mutex_unlock(philo->l_fork);
 	}
 	if (philo->id == 3)
 	{
 		pthread_mutex_lock(philo->r_fork);
-		ft_putstr_fd("\nPhilo number ", 1);
-		ft_putnbr_fd(philo->id, 1);
-		ft_putstr_fd(" grabing right Fork\n", 1);
+		printf("\nPhilo number %d grabing right Fork\n", philo->id);
 		sleep(2);
 		pthread_mutex_unlock(philo->r_fork);
 	}*/
@@ -120,6 +120,7 @@ int	ft_end_threads(t_philo *philo, int philo_num)
 	int	i;
 
 	i = 0;
+	
 	while (i < philo_num)
 	{
 		if (pthread_join(philo[i].thread_id, NULL) != 0)

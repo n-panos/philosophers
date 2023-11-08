@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:12:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/09/04 11:53:44 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/08 13:57:53 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	ft_args_to_struct(t_args *args, int argc, char **argv)
 	args->t_die = ft_aredigit_atoi(argv[2]);
 	args->t_eat = ft_aredigit_atoi(argv[3]);
 	args->t_sleep = ft_aredigit_atoi(argv[4]);
+	args->start_time = ft_get_time();
+	pthread_mutex_init(&args->writer, NULL);
 	if (argc == 6)
 		args->n_meals = ft_aredigit_atoi(argv[5]);
 	else

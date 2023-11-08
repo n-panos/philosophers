@@ -2,10 +2,10 @@
 
 NAME		= philo
 
-SRC			= src/philo.c src/parse.c src/utils.c src/exit.c \
-			src/threads_utils.c
+SRC			= philo.c parse.c utils.c exit.c threads_utils.c utils_time.c
 
-OBJS		= ${SRC:.c=.o}
+SRC_PATH	= $(addprefix src/, $(SRC))
+OBJS		= ${SRC_PATH:.c=.o}
 HEADER		= -Iheader
 CC			= gcc
 CFLAGS		= -Werror -Wall -Wextra
