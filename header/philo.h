@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/08 13:14:48 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/26 12:53:55 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_philo
 typedef struct s_prg
 {
 	t_args	args;
-	t_philo	*ph;
 }			t_prg;
 
 //		PARSE ARGS
@@ -65,7 +64,7 @@ int		ft_create_philos(t_prg *prg);
 int		ft_create_eat_forks(t_prg *prg, t_philo philo);
 int		ft_create_thread(void *v_philo);
 void	*ft_philo_routine(void *v_philo);
-int		ft_end_threads(t_philo *philo, int philo_num);
+int		ft_end_thread(t_philo *philo);
 
 //		UTILS
 

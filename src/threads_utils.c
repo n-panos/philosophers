@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 12:44:10 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/08 13:58:26 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/26 13:08:34 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	ft_create_philos(t_prg *prg)
 	ph = malloc(sizeof(t_philo) * (prg->args.philos - 1));
 	if (!ph)
 		return (1);
-	prg->ph = ph;
-	prg->ph->p_arg = &prg->args;
 	i = 0;
 	while (i < prg->args.philos)
 	{
