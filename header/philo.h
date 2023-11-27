@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/27 15:35:15 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/27 16:11:24 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ typedef struct s_prg
 	t_philo	*ph;
 }			t_prg;
 
+//		MAIN FUNCTIONS
+
+int		ft_init_prg(t_prg *prg, int argc, char **argv);
+int		ft_philosophers(t_prg *prg);
+
 //		PARSE ARGS
 
 int		ft_parse(char **argv, int argc, t_args *args);
 int		ft_args_to_struct(t_args *args, int argc, char **argv);
 int		ft_aredigit_atoi(char *str);
-
-//		MAIN FUNCTIONS
-
-int		ft_init_prg(t_prg *prg, int argc, char **argv);
-int		ft_philosophers(t_prg *prg);
 
 //		PRG CONFIG
 

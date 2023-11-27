@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:38:01 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/27 15:50:06 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/27 16:11:54 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	t_prg	*prg;
 	int		ret;
 
-	atexit(leaks);
+	//atexit(leaks);
 	prg = malloc(sizeof(t_prg));
 	if (!prg)
 		return (1);
@@ -39,8 +39,8 @@ int	ft_init_prg(t_prg *prg, int argc, char **argv)
 	i = ft_parse(argv, argc, &prg->args);
 	if (i != 0)
 		return (i);
-	ft_philosophers(prg);
-	return (0);
+	i = ft_philosophers(prg);
+	return (i);
 }
 
 int	ft_philosophers(t_prg *prg)

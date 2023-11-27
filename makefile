@@ -7,7 +7,7 @@ RM			= rm -rf
 DEBUG		= -ggdb -g3
 SANITIZE	= -fsanitize=address
 
-SRC			= philo.c parse.c utils.c exit.c threads_utils.c utils_time.c
+SRC			= philo.c init_philos.c parse.c exit.c threads.c utils_time.c utils.c
 SRC_PATH	= $(addprefix src/, $(SRC))
 
 HEADER		= -Iheader
