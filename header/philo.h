@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/26 12:53:55 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/27 15:35:15 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_args
 	int				n_meals;
 	long int		start_time;
 	pthread_mutex_t	writer;
-	pthread_mutex_t	*fork;
+	pthread_mutex_t	*forks;
 }			t_args;
 
 typedef struct s_philo
@@ -42,6 +42,7 @@ typedef struct s_philo
 typedef struct s_prg
 {
 	t_args	args;
+	t_philo	*ph;
 }			t_prg;
 
 //		PARSE ARGS
@@ -50,21 +51,23 @@ int		ft_parse(char **argv, int argc, t_args *args);
 int		ft_args_to_struct(t_args *args, int argc, char **argv);
 int		ft_aredigit_atoi(char *str);
 
-//		PRG CONFIG
+//		MAIN FUNCTIONS
 
 int		ft_init_prg(t_prg *prg, int argc, char **argv);
+int		ft_philosophers(t_prg *prg);
+
+//		PRG CONFIG
+
 void	ft_init_struct(t_prg *prg);
-int		ft_create_philos(t_prg *prg);
 
 //		THREADS	/	PHILOSOPHERS
 
-//int		ft_pair_threads(t_args *args, int error);
-//int		ft_odd_threads(t_args *args, int error);
 
-int		ft_create_eat_forks(t_prg *prg, t_philo philo);
+int		ft_create_philos(t_prg *prg);
+int		ft_init_forks(t_args *args);
 int		ft_create_thread(void *v_philo);
+int		ft_end_threads(t_philo *philo);
 void	*ft_philo_routine(void *v_philo);
-int		ft_end_thread(t_philo *philo);
 
 //		UTILS
 
@@ -78,5 +81,6 @@ void		ft_sleep(long int time_in_ms);
 
 int		ft_exit_success(t_prg *prg);
 int		ft_parse_errors(t_prg *prg, int error);
+void	ft_free_prg(t_prg *prg);
 
 #endif

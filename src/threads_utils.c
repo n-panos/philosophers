@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 12:44:10 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/26 13:08:34 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/27 15:34:08 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,54 +17,41 @@ int	ft_create_philos(t_prg *prg)
 	t_philo	*ph;
 	int		i;
 
-	ph = malloc(sizeof(t_philo) * (prg->args.philos - 1));
+	ph = malloc(sizeof(t_philo) * (prg->args.philos));
 	if (!ph)
 		return (1);
 	i = 0;
+	prg->ph = ph;
 	while (i < prg->args.philos)
 	{
 		ph[i].id = i;
 		ph[i].p_arg = &prg->args;
+		ph[i].l_fork = &(prg->args.forks[i]);
+		if (i == 0)
+			ph[i].r_fork = &(prg->args.forks[prg->args.philos - 1]);
+		else
+			ph[i].r_fork = &(prg->args.forks[i - 1]);
 		i++;
 	}
-	//ft_create_eat_forks(prg, prg->ph[i]);
-	i = 0;
-	while (i < prg->args.philos)
-	{
-		ft_create_thread(&prg->ph[i]);
-		i++;
-	}
-	ft_sleep(200);
-	ft_end_threads(prg->ph, prg->args.philos);
 	return (0);
 }
 
 //				(fork - sizeof(pthread_mutex_t));
 
-int	ft_create_eat_forks(t_prg *prg, t_philo philo)
+int	ft_init_forks(t_args *args)
 {
-	pthread_mutex_t	*fork;
 	int				i;
 
-	fork = malloc(sizeof(pthread_mutex_t) * prg->args.philos);
+	args->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * \
+	args->philos);
 	i = 0;
-	prg->args.fork = fork;
-	while (i < prg->args.philos)
+	if (!args->forks)
+		return (1);
+	while (i < args->philos)
 	{
-		pthread_mutex_init(&fork[i], NULL);
-		if (i == 0)
-		{
-			philo.r_fork = fork + (prg->args.philos - \
-			sizeof(pthread_mutex_t));
-			philo.l_fork = fork;
-		}
-		else
-		{
-			philo.l_fork = fork;
-			philo.r_fork = fork - sizeof(pthread_mutex_t);
-		}
-		fork = fork + sizeof(pthread_mutex_t);
-		i++;
+		if (pthread_mutex_init(&(args->forks[i]), NULL))
+			return (1);
+		++i;
 	}
 	return (0);
 }
@@ -111,18 +98,18 @@ void	*ft_philo_routine(void *v_philo)
 	return (0);
 }
 
-//	pthread_join needs free?
 
-int	ft_end_threads(t_philo *philo, int philo_num)
+
+int	ft_end_threads(t_philo *philo)
 {
 	int	i;
 
 	i = 0;
-	
-	while (i < philo_num)
+	while (i < philo->p_arg->philos)
 	{
 		if (pthread_join(philo[i].thread_id, NULL) != 0)
 			return (1);
+		pthread_mutex_destroy(&philo->p_arg->forks[i]);
 		i++;
 	}
 	return (0);
