@@ -13,7 +13,7 @@ SRC_PATH	= $(addprefix src/, $(SRC))
 HEADER		= -Iheader
 CFLAGS		= -Werror -Wall -Wextra
 
-OBJS		= ${SRC_PATH:.c=.o}
+OBJS		= $(SRC_PATH:.c=.o)
 
 # COLOUR DEFINITION #
 RED     := \033[0;31m
@@ -24,24 +24,24 @@ RESET   := \033[0m
 
 # BUILDS
 
-all:		${NAME}
+all:		$(NAME)
 
 .c.o:	%.o : %.c
-	@${CC} ${CFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
+	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $(<:.c=.o)
 
-${NAME}:	${OBJS}
-		@${CC} ${CFLAGS} $^ -o $@
-		@echo "${GREEN}<---> Philosophers Compiled! ⌐(ಠ۾ಠ)¬ <--->${RESET}"
+$(NAME):	$(OBJS)
+		@$(CC) $(CFLAGS) $^ -o $@
+		@echo "$(GREEN)<---> Philosophers Compiled! ⌐(ಠ۾ಠ)¬ <--->$(RESET)"
 
-debug:	CFLAGS	+= ${DEBUG} ${SANITIZE}
+debug:	CFLAGS	+= $(DEBUG) $(SANITIZE)
 debug:	re
 
 clean:
-		@${RM} ${OBJS}
+		@$(RM) $(OBJS)
 
 fclean:	clean
-	@${RM} ${NAME}
-	@echo "$(GREEN)<==========> ALL REMOVED <==========>${RESET}"
+	@$(RM) $(NAME)
+	@echo "$(GREEN)<==========> ALL REMOVED <==========>$(RESET)"
 
 re:		fclean all
 
