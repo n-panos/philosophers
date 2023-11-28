@@ -6,8 +6,9 @@ RM			= rm -rf
 
 DEBUG		= -ggdb -g3
 SANITIZE	= -fsanitize=address
-BUILD_PATH	= ./build
-MKDIR		= mkdir
+BUILD_PATH	= build
+MKDIR		= mkdir $(BUILD_PATH)
+MOVE		= mv $(OBJS) $(BUILD_PATH)
 
 SRC			= philo.c init_philos.c parse.c exit.c threads.c utils_time.c utils.c
 SRC_PATH	= $(addprefix src/, $(SRC))
@@ -16,6 +17,8 @@ HEADER		= -Iheader
 CFLAGS		= -Werror -Wall -Wextra
 
 OBJS		= $(SRC_PATH:.c=.o)
+MOVE_OBJS	= $(SRC:.c=.o)
+MOVE_OBJS_P	= $(addprefix build/, $(MOVE_OBJS))
 
 # COLOUR DEFINITION #
 RED     := \033[0;31m
@@ -32,7 +35,9 @@ all:		$(NAME)
 	$(CC) $(CFLAGS) $(HEADER) -c $< -o $(<:.c=.o)
 
 $(NAME):	$(OBJS)
-		$(CC) $(CFLAGS) $^ -o $@
+		$(MKDIR)
+		$(MOVE)
+		$(CC) $(CFLAGS) $(MOVE_OBJS_P) -o $@
 		@echo "$(GREEN)<---> Philosophers Compiled! ⌐(ಠ۾ಠ)¬ <--->$(RESET)"
 
 debug:	CFLAGS	+= $(DEBUG) $(SANITIZE)
@@ -40,6 +45,7 @@ debug:	re
 
 clean:
 		$(RM) $(OBJS)
+		$(RM) $(BUILD_PATH)
 
 fclean:	clean
 	$(RM) $(NAME)

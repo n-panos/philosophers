@@ -6,60 +6,39 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:37:40 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/28 12:28:39 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:46:08 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
-
-/*void	*ft_philo_routine(void *v_philo)
-{
-	t_philo		*philo;
-	long int	i;
-
-	philo = (t_philo *)v_philo;
-	pthread_mutex_lock(&philo->p_arg->writer);
-	i = ft_get_time() - philo->p_arg->start_time;
-	printf("\nThis is philo number %d, time is: %ld\n", philo->id, i);
-	//pthread_mutex_unlock(&philo->p_arg->write_mutex);
-	ft_sleep(200);
-	//pthread_mutex_lock(&philo->p_arg->write_mutex);
-	i = ft_get_time() - philo->p_arg->start_time;
-	printf("\nThis is again philo number %d, time is: %ld\n", philo->id, i);
-	pthread_mutex_unlock(&philo->p_arg->writer);
-	if (philo->id == 2)
-	{
-		pthread_mutex_lock(philo->l_fork);
-		printf("\nPhilo number %d grabing left Fork\n", philo->id);
-		sleep(2);
-		pthread_mutex_unlock(philo->l_fork);
-	}
-	if (philo->id == 3)
-	{
-		pthread_mutex_lock(philo->r_fork);
-		printf("\nPhilo number %d grabing right Fork\n", philo->id);
-		sleep(2);
-		pthread_mutex_unlock(philo->r_fork);
-	}
-	return (0);
-}*/
 
 void	*ft_routine(void *v_philo)
 {
 	t_philo		*philo;
 
 	philo = (t_philo *)v_philo;
-	ft_eat(*philo);
+	while (philo->test_count < 2)
+	{
+		ft_eat(philo);
+		ft_philo_sleep(philo);
+		philo->test_count++;
+	}
 	return (0);
 }
 
-void	ft_eat(t_philo philo)
+void	ft_philo_sleep(t_philo *philo)
 {
-	ft_get_fork(philo);
-	ft_sleep(200);
-	ft_print_status("finished eating", philo);
-	pthread_mutex_unlock(philo.l_fork);
-	pthread_mutex_unlock(philo.r_fork);
+	ft_print_status("is sleeping", *philo);
+	ft_sleep(philo->p_arg->t_sleep);
+}
+
+void	ft_eat(t_philo *philo)
+{
+	ft_get_fork(*philo);
+	ft_sleep(philo->p_arg->t_eat);
+	ft_print_status("finished eating", *philo);
+	pthread_mutex_unlock(philo->l_fork);
+	pthread_mutex_unlock(philo->r_fork);
 }
 
 void	ft_get_fork(t_philo philo)
@@ -84,7 +63,6 @@ void	ft_get_fork(t_philo philo)
 		pthread_mutex_lock(philo.r_fork);
 		ft_print_status("has taken right fork", philo);
 	}
-	++philo.test_count;
 }
 
 int	ft_create_thread(void *v_philo)

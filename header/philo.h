@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/28 12:08:13 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:40:24 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int			ft_create_philos(t_prg *prg);
 //		THREADS
 
 void		*ft_routine(void *v_philo);
-void		ft_eat(t_philo philo);
+void		ft_philo_sleep(t_philo *philo);
+void		ft_eat(t_philo *philo);
 void		ft_get_fork(t_philo philo);
 int			ft_create_thread(void *v_philo);
 int			ft_end_threads(t_philo *philo);
