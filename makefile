@@ -33,7 +33,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS)
 		$(CC) $(CFLAGS) $^ -o $@
-		echo "$(GREEN)<---> Philosophers Compiled! ⌐(ಠ۾ಠ)¬ <--->$(RESET)"
+		@echo "$(GREEN)<---> Philosophers Compiled! ⌐(ಠ۾ಠ)¬ <--->$(RESET)"
 
 debug:	CFLAGS	+= $(DEBUG) $(SANITIZE)
 debug:	re
@@ -43,7 +43,7 @@ clean:
 
 fclean:	clean
 	$(RM) $(NAME)
-	echo "$(GREEN)<==========> ALL REMOVED <==========>$(RESET)"
+	@echo "$(GREEN)<==========> ALL REMOVED <==========>$(RESET)"
 
 re:		fclean all
 

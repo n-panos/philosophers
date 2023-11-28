@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/27 16:58:54 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/28 12:08:13 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_args
 	int				t_sleep;
 	int				n_meals;
 	long int		start_time;
+	int				alive;
+	int				fed;
 	pthread_mutex_t	writer;
 	pthread_mutex_t	*forks;
 }			t_args;
@@ -48,30 +50,31 @@ typedef struct s_prg
 
 //		MAIN FUNCTIONS
 
-int		ft_init_prg(t_prg *prg, int argc, char **argv);
-int		ft_philosophers(t_prg *prg);
+int			ft_init_prg(t_prg *prg, int argc, char **argv);
+int			ft_philosophers(t_prg *prg);
 
 //		PARSE ARGS
 
-int		ft_parse(char **argv, int argc, t_args *args);
-int		ft_args_to_struct(t_args *args, int argc, char **argv);
-int		ft_aredigit_atoi(char *str);
+int			ft_parse(char **argv, int argc, t_args *args);
+int			ft_args_to_struct(t_args *args, int argc, char **argv);
+int			ft_aredigit_atoi(char *str);
 
 //		PRG CONFIG
 
-void	ft_init_struct(t_prg *prg);
+void		ft_init_struct(t_prg *prg);
 
 //		PHILO INIT
 
-int		ft_init_forks(t_args *args);
-int		ft_create_philos(t_prg *prg);
+int			ft_init_forks(t_args *args);
+int			ft_create_philos(t_prg *prg);
 
 //		THREADS
 
-void	*ft_routine(void *v_philo);
-void	ft_eat(t_philo philo);
-int		ft_create_thread(void *v_philo);
-int		ft_end_threads(t_philo *philo);
+void		*ft_routine(void *v_philo);
+void		ft_eat(t_philo philo);
+void		ft_get_fork(t_philo philo);
+int			ft_create_thread(void *v_philo);
+int			ft_end_threads(t_philo *philo);
 
 //		UTILS
 
@@ -80,11 +83,12 @@ int			ft_isdigit(int c);
 
 long int	ft_get_time(void);
 void		ft_sleep(long int time_in_ms);
+void		ft_print_status(char *str, t_philo ph);
 
 //		EXIT + ERROR + TEST FUNCTIONS
 
-int		ft_exit_success(t_prg *prg);
-int		ft_parse_errors(t_prg *prg, int error);
-void	ft_free_prg(t_prg *prg);
+int			ft_exit_success(t_prg *prg);
+int			ft_parse_errors(t_prg *prg, int error);
+void		ft_free_prg(t_prg *prg);
 
 #endif

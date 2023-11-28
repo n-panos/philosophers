@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   threads.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/28 11:37:40 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/11/28 12:28:39 by ipanos-o         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/philo.h"
 
 /*void	*ft_philo_routine(void *v_philo)
@@ -43,15 +55,36 @@ void	*ft_routine(void *v_philo)
 
 void	ft_eat(t_philo philo)
 {
-	pthread_mutex_lock(philo.l_fork);
-	pthread_mutex_lock(philo.r_fork);
-	pthread_mutex_lock(&(philo.p_arg->writer));
-	printf("philosopher %d is eating\n", philo.id);
-	++philo.test_count;
-	pthread_mutex_unlock(&(philo.p_arg->writer));
-	ft_sleep(2000);
+	ft_get_fork(philo);
+	ft_sleep(200);
+	ft_print_status("finished eating", philo);
 	pthread_mutex_unlock(philo.l_fork);
 	pthread_mutex_unlock(philo.r_fork);
+}
+
+void	ft_get_fork(t_philo philo)
+{
+	int	i;
+
+	if (philo.id == 1)
+		i = 1;
+	else
+		i = philo.id % 2;
+	if (i == 0)
+	{
+		pthread_mutex_lock(philo.r_fork);
+		ft_print_status("has taken right fork", philo);
+		pthread_mutex_lock(philo.l_fork);
+		ft_print_status("has taken left fork", philo);
+	}
+	else
+	{
+		pthread_mutex_lock(philo.l_fork);
+		ft_print_status("has taken left fork", philo);
+		pthread_mutex_lock(philo.r_fork);
+		ft_print_status("has taken right fork", philo);
+	}
+	++philo.test_count;
 }
 
 int	ft_create_thread(void *v_philo)

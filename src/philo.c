@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:38:01 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/27 17:10:47 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/28 11:37:50 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
-void	leaks()
+void	leaks(void)
 {
 	system("leaks -q philo");
 }
@@ -46,7 +46,7 @@ int	ft_init_prg(t_prg *prg, int argc, char **argv)
 int	ft_philosophers(t_prg *prg)
 {
 	int	i;
-	
+
 	if (ft_init_forks(&(prg->args)) == 1)
 		return (1);
 	if (ft_create_philos(prg) == 1)
@@ -60,12 +60,3 @@ int	ft_philosophers(t_prg *prg)
 	ft_end_threads(prg->ph);
 	return (0);
 }
-
-/*static void	ft_print_prg(t_args args)
-{
-	printf("number of philosophers: %d\n", args.philos);
-	printf("time to die: %d\n", args.t_die);
-	printf("time to eat: %d\n", args.t_eat);
-	printf("time sleeping: %d\n", args.t_sleep);
-	printf("number of meals: %d\n", args.n_meals);
-}*/
