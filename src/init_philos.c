@@ -31,6 +31,7 @@ int	ft_create_philos(t_prg *prg)
 	while (i < prg->args.philos)
 	{
 		ph[i].id = i;
+		ph[i].test_count = 0;
 		ph[i].p_arg = &prg->args;
 		ph[i].l_fork = &(prg->args.forks[i]);
 		if (i == 0)

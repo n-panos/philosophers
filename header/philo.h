@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/27 16:11:24 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/27 16:58:54 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_philo
 {
 	int				id;
 	pthread_t		thread_id;
+	int				test_count;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	t_args			*p_arg;
@@ -60,14 +61,17 @@ int		ft_aredigit_atoi(char *str);
 
 void	ft_init_struct(t_prg *prg);
 
-//		THREADS	/	PHILOSOPHERS
+//		PHILO INIT
 
-
-int		ft_create_philos(t_prg *prg);
 int		ft_init_forks(t_args *args);
+int		ft_create_philos(t_prg *prg);
+
+//		THREADS
+
+void	*ft_routine(void *v_philo);
+void	ft_eat(t_philo philo);
 int		ft_create_thread(void *v_philo);
 int		ft_end_threads(t_philo *philo);
-void	*ft_philo_routine(void *v_philo);
 
 //		UTILS
 

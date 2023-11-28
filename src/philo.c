@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:38:01 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/27 16:11:54 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/27 17:10:47 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	ft_philosophers(t_prg *prg)
 		ft_create_thread(&prg->ph[i]);
 		i++;
 	}
-	ft_sleep(200);
 	ft_end_threads(prg->ph);
 	return (0);
 }
