@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:37:40 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/28 15:36:41 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:22:43 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 void	*ft_routine(void *v_philo)
 {
 	t_philo		*philo;
+	long int	count_to_die;
 
 	philo = (t_philo *)v_philo;
-	while (philo->test_count < 2)
+	while (1)
 	{
-		ft_eat(philo);
+		count_to_die = ft_get_time();
+		ft_eat(philo, count_to_die);
 		ft_philo_sleep(philo);
+		if (philo->control == 0)
+			break ;
 	}
 	return (0);
 }
@@ -31,12 +35,12 @@ void	ft_philo_sleep(t_philo *philo)
 	ft_sleep(philo->p_arg->t_sleep);
 }
 
-void	ft_eat(t_philo *philo)
+void	ft_eat(t_philo *philo, long int count_to_die)
 {
 	ft_get_fork(*philo);
 	ft_sleep(philo->p_arg->t_eat);
 	ft_print_status("finished eating", *philo);
-	philo->test_count++;
+	philo->control--;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
 }

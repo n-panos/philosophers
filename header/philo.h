@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/28 12:40:24 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/28 21:22:52 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_philo
 {
 	int				id;
 	pthread_t		thread_id;
-	int				test_count;
+	int				control;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	t_args			*p_arg;
@@ -72,7 +72,7 @@ int			ft_create_philos(t_prg *prg);
 
 void		*ft_routine(void *v_philo);
 void		ft_philo_sleep(t_philo *philo);
-void		ft_eat(t_philo *philo);
+void		ft_eat(t_philo *philo, long int count_to_die);
 void		ft_get_fork(t_philo philo);
 int			ft_create_thread(void *v_philo);
 int			ft_end_threads(t_philo *philo);
