@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:37:40 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/28 12:46:08 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:36:41 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	*ft_routine(void *v_philo)
 	{
 		ft_eat(philo);
 		ft_philo_sleep(philo);
-		philo->test_count++;
 	}
 	return (0);
 }
@@ -37,6 +36,7 @@ void	ft_eat(t_philo *philo)
 	ft_get_fork(*philo);
 	ft_sleep(philo->p_arg->t_eat);
 	ft_print_status("finished eating", *philo);
+	philo->test_count++;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
 }

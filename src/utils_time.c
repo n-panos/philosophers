@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_time.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 10:55:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/28 12:05:52 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:51:19 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	ft_print_status(char *str, t_philo ph)
 	pthread_mutex_lock(&(ph.p_arg->writer));
 	time = ft_get_time() - ph.p_arg->start_time;
 	if (ph.p_arg->alive == 0 && ph.p_arg->fed == 0)
-		printf("[%lu] - %d %s\n", time, ph.id, str);
+		printf("%lu - %d %s\n", time, ph.id, str);
 	pthread_mutex_unlock(&(ph.p_arg->writer));
 }
