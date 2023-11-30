@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:38:01 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/28 11:37:50 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/29 10:32:02 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	if (!prg)
 		return (1);
 	ret = ft_init_prg(prg, argc, argv);
-	if (ret != 0)
+	if (ret > 0)
 		return (ft_parse_errors(prg, ret));
 	return (ft_exit_success(prg));
 }
@@ -37,8 +37,10 @@ int	ft_init_prg(t_prg *prg, int argc, char **argv)
 	int	i;
 
 	i = ft_parse(argv, argc, &prg->args);
-	if (i != 0)
+	if (i > 0)
 		return (i);
+	if (i == -1)
+		printf("Be carefull, with this arguments, a philosopher might die\n");
 	i = ft_philosophers(prg);
 	return (i);
 }

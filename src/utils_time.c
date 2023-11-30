@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_time.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 10:55:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/28 14:51:19 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/29 11:47:23 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ void	ft_sleep(long int time_in_ms)
 		usleep(time_in_ms / 10);
 }
 
-void	ft_print_status(char *str, t_philo ph)
+void	ft_sleep_live(t_philo *philo, long int start_t, long int sleep_t)
 {
-	unsigned long	time;
-
-	pthread_mutex_lock(&(ph.p_arg->writer));
-	time = ft_get_time() - ph.p_arg->start_time;
-	if (ph.p_arg->alive == 0 && ph.p_arg->fed == 0)
-		printf("%lu - %d %s\n", time, ph.id, str);
-	pthread_mutex_unlock(&(ph.p_arg->writer));
+	if (start_t < sleep_t)
+	{
+		ft_sleep(sleep_t - start_t);
+		philo->p_arg->alive == 1;
+		ft_print_status("died", *philo);
+	}
+	else
+		ft_sleep(sleep_t);
 }

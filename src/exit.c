@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:38:16 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/27 15:49:26 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/29 10:09:58 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ int	ft_parse_errors(t_prg *prg, int error)
 		printf("Invalid number of arguments\n");
 	if (error == 2)
 		printf("Error: arguments MUST be valid numbers\n");
-	if (error == 3)
-		printf("For this arguments, time to die should be greater than %d\n", \
-		prg->args.t_die);
 	printf("Use example: ./philo 4 401 200 200 (5)\n");
 	ft_free_prg(prg);
 	return (1);

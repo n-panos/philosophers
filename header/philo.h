@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/28 21:22:52 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/29 11:45:24 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_args
 	int				n_meals;
 	long int		start_time;
 	int				alive;
-	int				fed;
 	pthread_mutex_t	writer;
 	pthread_mutex_t	*forks;
 }			t_args;
@@ -71,20 +70,22 @@ int			ft_create_philos(t_prg *prg);
 //		THREADS
 
 void		*ft_routine(void *v_philo);
-void		ft_philo_sleep(t_philo *philo);
-void		ft_eat(t_philo *philo, long int count_to_die);
+int			ft_philo_sleep(t_philo *philo);
+long int	ft_eat(t_philo *philo, long int t_last_meal);
 void		ft_get_fork(t_philo philo);
 int			ft_create_thread(void *v_philo);
 int			ft_end_threads(t_philo *philo);
 
 //		UTILS
 
+void		ft_check_dead(t_philo *philo, long int t_last_meal);
+void		ft_print_status(char *str, t_philo ph);
 int			ft_atoi(const char *str);
 int			ft_isdigit(int c);
 
 long int	ft_get_time(void);
 void		ft_sleep(long int time_in_ms);
-void		ft_print_status(char *str, t_philo ph);
+void		ft_sleep_live(t_philo *philo, long int start_t, long int sleep_t);
 
 //		EXIT + ERROR + TEST FUNCTIONS
 

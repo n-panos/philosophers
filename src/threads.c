@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:37:40 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/28 21:22:43 by nacho            ###   ########.fr       */
+/*   Updated: 2023/11/29 10:57:11 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,37 @@
 void	*ft_routine(void *v_philo)
 {
 	t_philo		*philo;
-	long int	count_to_die;
+	long int	t_last_meal;
 
 	philo = (t_philo *)v_philo;
+	t_last_meal = ft_get_time();
 	while (1)
 	{
-		count_to_die = ft_get_time();
-		ft_eat(philo, count_to_die);
-		ft_philo_sleep(philo);
-		if (philo->control == 0)
+		ft_eat(philo, t_last_meal);
+		if (philo->p_arg->alive == 0)
+			ft_philo_sleep(philo);
+		if (philo->control == 0 || philo->p_arg->alive == 1)
 			break ;
 	}
 	return (0);
 }
 
-void	ft_philo_sleep(t_philo *philo)
+int	ft_philo_sleep(t_philo *philo)
 {
 	ft_print_status("is sleeping", *philo);
 	ft_sleep(philo->p_arg->t_sleep);
+	ft_print_status("is thinking", *philo);
 }
 
-void	ft_eat(t_philo *philo, long int count_to_die)
+long int	ft_eat(t_philo *philo, long int t_last_meal)
 {
 	ft_get_fork(*philo);
-	ft_sleep(philo->p_arg->t_eat);
-	ft_print_status("finished eating", *philo);
+	t_last_meal = ft_get_time();
+	ft_sleep_live(philo, philo->p_arg->t_eat);
 	philo->control--;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
+	return (t_last_meal);
 }
 
 void	ft_get_fork(t_philo philo)
@@ -56,16 +59,16 @@ void	ft_get_fork(t_philo philo)
 	if (i == 0)
 	{
 		pthread_mutex_lock(philo.r_fork);
-		ft_print_status("has taken right fork", philo);
+		ft_print_status("has taken a fork", philo);
 		pthread_mutex_lock(philo.l_fork);
-		ft_print_status("has taken left fork", philo);
+		ft_print_status("is eating", philo);
 	}
 	else
 	{
 		pthread_mutex_lock(philo.l_fork);
-		ft_print_status("has taken left fork", philo);
+		ft_print_status("has taken a fork", philo);
 		pthread_mutex_lock(philo.r_fork);
-		ft_print_status("has taken right fork", philo);
+		ft_print_status("is eating", philo);
 	}
 }
 

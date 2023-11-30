@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:37:37 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/28 12:16:42 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/29 09:56:43 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_create_philos(t_prg *prg)
 	while (i < prg->args.philos)
 	{
 		ph[i].id = i + 1;
-		ph[i].test_count = 0;
+		ph[i].control = 10;
 		ph[i].p_arg = &prg->args;
 		ph[i].l_fork = &(prg->args.forks[i]);
 		if (i == 0)
