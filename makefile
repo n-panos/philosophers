@@ -10,7 +10,7 @@ BUILD_PATH	= build
 MKDIR		= mkdir $(BUILD_PATH)
 MOVE		= mv $(OBJS) $(BUILD_PATH)
 
-SRC			= philo.c init_philos.c parse.c exit.c threads.c utils_time.c utils.c
+SRC			= exit.c init.c parse.c philo.c routine.c threads.c utils_time.c utils.c
 SRC_PATH	= $(addprefix src/, $(SRC))
 
 HEADER		= -Iheader

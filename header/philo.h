@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/29 11:45:24 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:58:02 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,9 @@ int			ft_parse(char **argv, int argc, t_args *args);
 int			ft_args_to_struct(t_args *args, int argc, char **argv);
 int			ft_aredigit_atoi(char *str);
 
-//		PRG CONFIG
-
-void		ft_init_struct(t_prg *prg);
-
 //		PHILO INIT
 
+int			ft_init_prg(t_prg *prg, int argc, char **argv);
 int			ft_init_forks(t_args *args);
 int			ft_create_philos(t_prg *prg);
 

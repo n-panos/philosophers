@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:51:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/29 10:43:33 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/30 12:59:51 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_check_dead(t_philo *philo, long int t_last_meal)
 
 	t_current = ft_get_time() - t_last_meal;
 	if (t_current > philo->p_arg->t_die)
-		philo->p_arg->alive == 1;
+		philo->p_arg->alive = 1;
 }
 
 void	ft_print_status(char *str, t_philo ph)

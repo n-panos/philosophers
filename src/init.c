@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_philos.c                                      :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 11:37:37 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/29 09:56:43 by ipanos-o         ###   ########.fr       */
+/*   Created: 2023/11/30 12:47:50 by ipanos-o          #+#    #+#             */
+/*   Updated: 2023/11/30 12:58:24 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
+
+int	ft_init_prg(t_prg *prg, int argc, char **argv)
+{
+	int	i;
+
+	i = ft_parse(argv, argc, &prg->args);
+	if (i > 0)
+		return (i);
+	if (i == -1)
+		printf("Be carefull, with this arguments, a philosopher might die\n");
+	i = ft_philosophers(prg);
+	return (i);
+}
 
 int	ft_init_forks(t_args *args)
 {

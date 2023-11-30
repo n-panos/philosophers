@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 10:55:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/29 11:47:23 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/30 13:00:27 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	ft_sleep(long int time_in_ms)
 		usleep(time_in_ms / 10);
 }
 
-void	ft_sleep_live(t_philo *philo, long int start_t, long int sleep_t)
+void	ft_sleep_live(t_philo *philo, long int startt, long int sleept)
 {
-	if (start_t < sleep_t)
+	if (startt < sleept)
 	{
-		ft_sleep(sleep_t - start_t);
-		philo->p_arg->alive == 1;
+		ft_sleep(sleept - startt);
+		philo->p_arg->alive = 1;
 		ft_print_status("died", *philo);
 	}
 	else
-		ft_sleep(sleep_t);
+		ft_sleep(sleept);
 }
