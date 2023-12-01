@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/30 12:58:02 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/01 10:38:12 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_args
 typedef struct s_philo
 {
 	int				id;
+	long int		last_meal;
 	pthread_t		thread_id;
-	int				control;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	t_args			*p_arg;
@@ -51,6 +51,7 @@ typedef struct s_prg
 
 int			ft_init_prg(t_prg *prg, int argc, char **argv);
 int			ft_philosophers(t_prg *prg);
+void		ft_alive(t_prg *prg);
 
 //		PARSE ARGS
 
@@ -68,17 +69,18 @@ int			ft_create_philos(t_prg *prg);
 
 void		*ft_routine(void *v_philo);
 int			ft_philo_sleep(t_philo *philo);
-long int	ft_eat(t_philo *philo, long int t_last_meal);
+void		ft_eat(t_philo *philo);
 void		ft_get_fork(t_philo philo);
 int			ft_create_thread(void *v_philo);
 int			ft_end_threads(t_philo *philo);
 
 //		UTILS
 
-void		ft_check_dead(t_philo *philo, long int t_last_meal);
-void		ft_print_status(char *str, t_philo ph);
+int			ft_check_dead(t_philo *philo);
+void		ft_print_status(char *str, t_philo *ph);
 int			ft_atoi(const char *str);
 int			ft_isdigit(int c);
+int			ft_strncmp(const char *s1, const char *s2, size_t len);
 
 long int	ft_get_time(void);
 void		ft_sleep(long int time_in_ms);

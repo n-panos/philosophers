@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:47:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/30 12:58:24 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/01 10:07:47 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	ft_init_prg(t_prg *prg, int argc, char **argv)
 	i = ft_parse(argv, argc, &prg->args);
 	if (i > 0)
 		return (i);
-	if (i == -1)
-		printf("Be carefull, with this arguments, a philosopher might die\n");
 	i = ft_philosophers(prg);
 	return (i);
 }
@@ -56,7 +54,7 @@ int	ft_create_philos(t_prg *prg)
 	while (i < prg->args.philos)
 	{
 		ph[i].id = i + 1;
-		ph[i].control = 10;
+		ph[i].last_meal = prg->args.start_time;
 		ph[i].p_arg = &prg->args;
 		ph[i].l_fork = &(prg->args.forks[i]);
 		if (i == 0)

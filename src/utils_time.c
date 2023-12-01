@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_time.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 10:55:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/30 13:00:27 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:33:42 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,4 @@ void	ft_sleep(long int time_in_ms)
 	start_time = ft_get_time();
 	while ((ft_get_time() - start_time) < time_in_ms)
 		usleep(time_in_ms / 10);
-}
-
-void	ft_sleep_live(t_philo *philo, long int startt, long int sleept)
-{
-	if (startt < sleept)
-	{
-		ft_sleep(sleept - startt);
-		philo->p_arg->alive = 1;
-		ft_print_status("died", *philo);
-	}
-	else
-		ft_sleep(sleept);
 }

@@ -3,33 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:51:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/30 12:59:51 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:42:18 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
-void	ft_check_dead(t_philo *philo, long int t_last_meal)
+int	ft_check_dead(t_philo *philo)
 {
-	long int	t_current;
+	long int	currentt;
 
-	t_current = ft_get_time() - t_last_meal;
-	if (t_current > philo->p_arg->t_die)
-		philo->p_arg->alive = 1;
+	currentt = ft_get_time() - philo->last_meal;
+	if (currentt > philo->p_arg->t_die)
+	{
+		ft_print_status("died", philo);
+		return (1);
+	}
+	return (0);
 }
 
-void	ft_print_status(char *str, t_philo ph)
+void	ft_print_status(char *str, t_philo *ph)
 {
 	unsigned long	time;
 
-	pthread_mutex_lock(&(ph.p_arg->writer));
-	time = ft_get_time() - ph.p_arg->start_time;
-	if (ph.p_arg->alive == 0)
-		printf("%lu - %d %s\n", time, ph.id, str);
-	pthread_mutex_unlock(&(ph.p_arg->writer));
+	pthread_mutex_lock(&(ph->p_arg->writer));
+	time = ft_get_time() - ph->p_arg->start_time;
+	if (ph->p_arg->alive == 0)
+	{
+		printf("%lu - %d %s\n", time, ph->id, str);
+		if (ft_strncmp(str, "died", 4) == 0)
+			ph->p_arg->alive = 1;
+	}
+	pthread_mutex_unlock(&(ph->p_arg->writer));
 }
 
 int	ft_atoi(const char *str)
@@ -65,4 +73,20 @@ int	ft_isdigit(int c)
 	if (48 <= c && c <= 57)
 		return (1);
 	return (0);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t len)
+{
+	const unsigned char	*ss1;
+	const unsigned char	*ss2;
+	size_t				i;
+
+	i = 0;
+	ss1 = (const unsigned char *)s1;
+	ss2 = (const unsigned char *)s2;
+	if (len == 0)
+		return (0);
+	while (ss1[i] == ss2[i] && ss1[i] != '\0' && ss2[i] != '\0' && i < len - 1)
+		i++;
+	return (ss1[i] - ss2[i]);
 }
