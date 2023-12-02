@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:47:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/01 10:07:47 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/02 10:27:03 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	ft_create_philos(t_prg *prg)
 	while (i < prg->args.philos)
 	{
 		ph[i].id = i + 1;
+		ph[i].meals = 0;
 		ph[i].last_meal = prg->args.start_time;
 		ph[i].p_arg = &prg->args;
 		ph[i].l_fork = &(prg->args.forks[i]);

@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:38:01 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/01 10:17:33 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/02 11:36:18 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ int	ft_philosophers(t_prg *prg)
 	ft_sleep(prg->args.t_die);
 	while (prg->args.alive == 0)
 	{
+		if (prg->args.full == prg->args.philos)
+			break;
 		ft_alive(prg);
-		//if (prg->args.alleat == prg->args.n_meals)
 	}
 	ft_end_threads(prg->ph);
 	return (0);
@@ -65,8 +66,8 @@ void	ft_alive(t_prg *prg)
 	{
 		if (prg->args.alive == 1)
 			break ;
-		ft_check_dead(&(prg->ph[i]));
+		if (prg->args.n_meals == -2 || prg->ph[i].meals < prg->args.n_meals)
+			ft_check_dead(&(prg->ph[i]));
 		++i;
 	}
-	ft_sleep(10);
 }

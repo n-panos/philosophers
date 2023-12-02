@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:51:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/01 11:42:18 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/02 10:38:59 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_print_status(char *str, t_philo *ph)
 
 	pthread_mutex_lock(&(ph->p_arg->writer));
 	time = ft_get_time() - ph->p_arg->start_time;
-	if (ph->p_arg->alive == 0)
+	if (ph->p_arg->alive == 0 && ph->p_arg->full != ph->p_arg->philos)
 	{
 		printf("%lu - %d %s\n", time, ph->id, str);
 		if (ft_strncmp(str, "died", 4) == 0)

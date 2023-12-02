@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/01 10:38:12 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/02 10:29:55 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_args
 	int				n_meals;
 	long int		start_time;
 	int				alive;
+	int				full;
 	pthread_mutex_t	writer;
 	pthread_mutex_t	*forks;
 }			t_args;
@@ -34,6 +35,7 @@ typedef struct s_args
 typedef struct s_philo
 {
 	int				id;
+	int				meals;
 	long int		last_meal;
 	pthread_t		thread_id;
 	pthread_mutex_t	*l_fork;
