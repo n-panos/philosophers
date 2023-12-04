@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/02 10:29:55 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/04 10:14:54 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,16 @@ int			ft_init_prg(t_prg *prg, int argc, char **argv);
 int			ft_init_forks(t_args *args);
 int			ft_create_philos(t_prg *prg);
 
-//		THREADS
+//		ROUTINE
 
 void		*ft_routine(void *v_philo);
 int			ft_philo_sleep(t_philo *philo);
 void		ft_eat(t_philo *philo);
 void		ft_get_fork(t_philo philo);
+void		ft_solo_routine(t_philo *philo);
+
+//		THREADS
+
 int			ft_create_thread(void *v_philo);
 int			ft_end_threads(t_philo *philo);
 

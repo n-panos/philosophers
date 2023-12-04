@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:12:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/02 11:32:37 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/04 10:45:56 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	ft_parse(char **argv, int argc, t_args *args)
 {
 	if (ft_args_to_struct(args, argc, argv) == 1)
 		return (1);
-	if (args->philos == -1 || args->t_die == -1 || args->t_eat == -1 || \
-	args->t_sleep == -1 || args->n_meals == -1)
+	if (args->philos <= 0 || args->t_die <= 0 || args->t_eat <= 0 || \
+	args->t_sleep <= 0 || args->n_meals == -1)
 		return (2);
 	return (0);
 }

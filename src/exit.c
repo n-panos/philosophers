@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:38:16 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/11/29 10:09:58 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/04 10:42:52 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_parse_errors(t_prg *prg, int error)
 	if (error == 1)
 		printf("Invalid number of arguments\n");
 	if (error == 2)
-		printf("Error: arguments MUST be valid numbers\n");
+		printf("Error: arguments MUST be valid positive numbers\n");
 	printf("Use example: ./philo 4 401 200 200 (5)\n");
 	ft_free_prg(prg);
 	return (1);
