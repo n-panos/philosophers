@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:51:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/02 10:38:59 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/05 16:29:27 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t len)
 	ss2 = (const unsigned char *)s2;
 	if (len == 0)
 		return (0);
-	while (ss1[i] == ss2[i] && ss1[i] != '\0' && ss2[i] != '\0' && i < len - 1)
+	while (ss1[i] == ss2[i] && ss1[i] != '\0' \
+	&& ss2[i] != '\0' && i < len - 1)
 		i++;
 	return (ss1[i] - ss2[i]);
 }

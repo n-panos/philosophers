@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:38:01 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/02 11:36:18 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/05 16:28:43 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_philosophers(t_prg *prg)
 	while (prg->args.alive == 0)
 	{
 		if (prg->args.full == prg->args.philos)
-			break;
+			break ;
 		ft_alive(prg);
 	}
 	ft_end_threads(prg->ph);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:45:47 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/04 10:22:44 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/05 17:13:17 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@ void	*ft_routine(void *v_philo)
 		ft_solo_routine(philo);
 		return (0);
 	}
+	if (philo->id > 1 && philo->id % 2 == 0 || \
+		(philo->p_arg->philos % 2 == 1 && philo->p_arg->philos == philo->id))
+		ft_sleep(1);
 	while (1)
 	{
 		if (philo->p_arg->alive == 0)
 			ft_eat(philo);
 		ft_philo_sleep(philo);
-		if (philo->p_arg->alive == 1 || philo->meals == philo->p_arg->n_meals )
+		if (philo->p_arg->alive == 1 || philo->meals == philo->p_arg->n_meals)
 			break ;
 	}
 	return (0);
@@ -62,18 +65,18 @@ void	ft_get_fork(t_philo philo)
 		i = 1;
 	else
 		i = philo.id % 2;
-	if (i == 0)
+	if (i == 0) || \
+	(philo.p_arg->philos % 2 == 1 && i == 0))
 	{
 		pthread_mutex_lock(philo.r_fork);
-		ft_print_status("has taken a fork", &philo);
+		ft_print_status("has taken right fork", &philo);
 		pthread_mutex_lock(philo.l_fork);
 		ft_print_status("is eating", &philo);
 	}
 	else
 	{
-		ft_sleep(1);
 		pthread_mutex_lock(philo.l_fork);
-		ft_print_status("has taken a fork", &philo);
+		ft_print_status("has taken left fork", &philo);
 		pthread_mutex_lock(philo.r_fork);
 		ft_print_status("is eating", &philo);
 	}
