@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:45:47 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/05 17:13:17 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/06 10:52:26 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_routine(void *v_philo)
 		ft_solo_routine(philo);
 		return (0);
 	}
-	if (philo->id > 1 && philo->id % 2 == 0 || \
+	if ((philo->id > 1 && philo->id % 2 == 0) || \
 		(philo->p_arg->philos % 2 == 1 && philo->p_arg->philos == philo->id))
 		ft_sleep(1);
 	while (1)
@@ -59,27 +59,10 @@ void	ft_eat(t_philo *philo)
 
 void	ft_get_fork(t_philo philo)
 {
-	int	i;
-
-	if (philo.id == 1)
-		i = 1;
-	else
-		i = philo.id % 2;
-	if (i == 0) || \
-	(philo.p_arg->philos % 2 == 1 && i == 0))
-	{
-		pthread_mutex_lock(philo.r_fork);
-		ft_print_status("has taken right fork", &philo);
-		pthread_mutex_lock(philo.l_fork);
-		ft_print_status("is eating", &philo);
-	}
-	else
-	{
-		pthread_mutex_lock(philo.l_fork);
-		ft_print_status("has taken left fork", &philo);
-		pthread_mutex_lock(philo.r_fork);
-		ft_print_status("is eating", &philo);
-	}
+	pthread_mutex_lock(philo.l_fork);
+	ft_print_status("has taken left fork", &philo);
+	pthread_mutex_lock(philo.r_fork);
+	ft_print_status("is eating", &philo);
 }
 
 void	ft_solo_routine(t_philo *philo)
