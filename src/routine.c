@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:45:47 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/11 10:34:07 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/11 20:44:11 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ int	ft_philo_sleep(t_philo *philo)
 void	ft_eat(t_philo *philo)
 {
 	ft_get_fork(*philo);
+	pthread_mutex_lock(&(philo->p_arg->died));
 	philo->last_meal = ft_get_time();
 	philo->meals++;
+	pthread_mutex_unlock(&(philo->p_arg->died));
 	ft_sleep(philo->p_arg->t_eat);
 }
 

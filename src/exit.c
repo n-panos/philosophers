@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:38:16 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/04 10:42:52 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/11 19:45:42 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_parse_errors(t_prg *prg, int error)
 void	ft_free_prg(t_prg *prg)
 {
 	pthread_mutex_destroy(&prg->args.writer);
+	pthread_mutex_destroy(&prg->args.died);
 	if (prg->args.forks != NULL)
 		free(prg->args.forks);
 	free(prg->ph);

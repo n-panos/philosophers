@@ -5,7 +5,7 @@ CC			= gcc
 RM			= rm -rf
 
 DEBUG		= -ggdb -g3
-SANITIZE	= -fsanitize=address
+SANITIZE	= -fsanitize=thread
 BUILD_PATH	= build
 MKDIR		= mkdir $(BUILD_PATH)
 MOVE		= mv $(OBJS) $(BUILD_PATH)

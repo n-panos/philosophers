@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:38:01 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/11 10:39:30 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/11 20:30:53 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ void	ft_alive(t_prg *prg)
 	{
 		if (prg->args.alive == 1)
 			break ;
+		pthread_mutex_lock(&(prg->args.died));
 		if (prg->args.n_meals == -2 || prg->ph[i].meals < prg->args.n_meals)
 			ft_check_dead(&(prg->ph[i]));
+		pthread_mutex_unlock(&(prg->args.died));
 		++i;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/04 10:14:54 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/11 19:32:08 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_args
 	int				alive;
 	int				full;
 	pthread_mutex_t	writer;
+	pthread_mutex_t	died;
 	pthread_mutex_t	*forks;
 }			t_args;
 
