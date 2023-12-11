@@ -6,7 +6,7 @@
 /*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:38:01 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/05 16:28:43 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/11 10:39:30 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char **argv)
 	t_prg	*prg;
 	int		ret;
 
-	//atexit(leaks);
 	prg = malloc(sizeof(t_prg));
 	if (!prg)
 		return (1);
