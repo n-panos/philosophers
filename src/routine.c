@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:45:47 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/11 20:44:11 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/12 10:53:08 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,35 @@ void	*ft_routine(void *v_philo)
 		ft_sleep(5);
 	while (1)
 	{
+		pthread_mutex_lock(&(philo->p_arg->died));
+		if (philo->p_arg->alive == 1 || philo->meals == philo->p_arg->n_meals)
+			break ;
 		if (philo->p_arg->alive == 0)
 			ft_eat(philo);
 		ft_philo_sleep(philo);
-		if (philo->p_arg->alive == 1 || philo->meals == philo->p_arg->n_meals)
-			break ;
 	}
 	return (0);
 }
 
 int	ft_philo_sleep(t_philo *philo)
 {
+	int	alive;
+
 	ft_print_status("is sleeping", philo);
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
-	if (philo->p_arg->alive == 0)
+	pthread_mutex_lock(&(philo->p_arg->died));
+	alive = philo->p_arg->alive;
+	pthread_mutex_unlock(&(philo->p_arg->died));
+	if (alive == 0)
 		ft_sleep(philo->p_arg->t_sleep);
 	ft_print_status("is thinking", philo);
 	if (philo->meals == philo->p_arg->n_meals)
+	{
+		pthread_mutex_lock(&(philo->p_arg->eating));
 		philo->p_arg->full++;
+		pthread_mutex_unlock(&(philo->p_arg->eating));
+	}
 	return (1);
 }
 

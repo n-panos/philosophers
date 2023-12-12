@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:51:25 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/11 20:30:58 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/12 10:41:39 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ void	ft_print_status(char *str, t_philo *ph)
 	{
 		printf("%lu - %d %s\n", time, ph->id, str);
 		if (ft_strncmp(str, "died", 4) == 0)
+		{
+			pthread_mutex_lock(&(ph->p_arg->died));
 			ph->p_arg->alive = 1;
+			pthread_mutex_unlock(&(ph->p_arg->died));
+		}
 	}
 	pthread_mutex_unlock(&(ph->p_arg->writer));
 }

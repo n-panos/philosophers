@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:38:01 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/11 20:30:53 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/12 10:55:27 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int argc, char **argv)
 int	ft_philosophers(t_prg *prg)
 {
 	int	i;
+	int	full;
 
 	if (ft_init_forks(&(prg->args)) == 1)
 		return (1);
@@ -48,7 +49,10 @@ int	ft_philosophers(t_prg *prg)
 	ft_sleep(prg->args.t_die);
 	while (prg->args.alive == 0)
 	{
-		if (prg->args.full == prg->args.philos)
+		pthread_mutex_lock(&(prg->args.eating));
+		full = prg->args.full;
+		pthread_mutex_unlock(&(prg->args.eating));
+		if (full == prg->args.philos)
 			break ;
 		ft_alive(prg);
 	}
@@ -65,10 +69,8 @@ void	ft_alive(t_prg *prg)
 	{
 		if (prg->args.alive == 1)
 			break ;
-		pthread_mutex_lock(&(prg->args.died));
 		if (prg->args.n_meals == -2 || prg->ph[i].meals < prg->args.n_meals)
 			ft_check_dead(&(prg->ph[i]));
-		pthread_mutex_unlock(&(prg->args.died));
 		++i;
 	}
 }

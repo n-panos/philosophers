@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/11 19:32:08 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/12 10:56:12 by ipanos-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_args
 	int				full;
 	pthread_mutex_t	writer;
 	pthread_mutex_t	died;
+	pthread_mutex_t	eating;
 	pthread_mutex_t	*forks;
 }			t_args;
 
