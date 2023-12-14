@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:38:01 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/12 10:55:27 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/14 09:29:34 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,8 @@ int	main(int argc, char **argv)
 int	ft_philosophers(t_prg *prg)
 {
 	int	i;
-	int	full;
+	int	alive;
 
-	if (ft_init_forks(&(prg->args)) == 1)
-		return (1);
-	if (ft_create_philos(prg) == 1)
-		return (1);
 	i = 0;
 	while (i < prg->args.philos)
 	{
@@ -47,12 +43,12 @@ int	ft_philosophers(t_prg *prg)
 		i++;
 	}
 	ft_sleep(prg->args.t_die);
-	while (prg->args.alive == 0)
+	while (1)
 	{
-		pthread_mutex_lock(&(prg->args.eating));
-		full = prg->args.full;
-		pthread_mutex_unlock(&(prg->args.eating));
-		if (full == prg->args.philos)
+		alive = ft_cpy_mutex(prg->args.alive, &prg->args.died);
+		if (alive == 1)
+			break ;
+		if (ft_full(prg) == 1)
 			break ;
 		ft_alive(prg);
 	}
@@ -63,14 +59,38 @@ int	ft_philosophers(t_prg *prg)
 void	ft_alive(t_prg *prg)
 {
 	int	i;
+	int	alive;
 
 	i = 0;
 	while (i < prg->args.philos)
 	{
-		if (prg->args.alive == 1)
+		alive = ft_cpy_mutex(prg->args.alive, &prg->args.died);
+		if (alive == 1)
 			break ;
-		if (prg->args.n_meals == -2 || prg->ph[i].meals < prg->args.n_meals)
-			ft_check_dead(&(prg->ph[i]));
+		ft_check_dead(&(prg->ph[i]));
 		++i;
 	}
+}
+
+int	ft_full(t_prg *prg)
+{
+	int	full;
+	int	i;
+	int	meals;
+
+	i = 0;
+	full = 0;
+	while (i < prg->args.philos)
+	{
+		pthread_mutex_lock(&(prg->args.eating));
+		meals = prg->ph[i].meals;
+		pthread_mutex_unlock(&(prg->args.eating));
+		if (meals == prg->args.n_meals)
+			++full;
+		++i;
+	}
+	if (full == prg->args.philos)
+		return (1);
+	ft_sleep(5);
+	return (0);
 }

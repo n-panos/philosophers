@@ -6,11 +6,11 @@ RM			= rm -rf
 
 DEBUG		= -ggdb -g3
 SANITIZE	= -fsanitize=thread
+
 BUILD_PATH	= build
-MKDIR		= mkdir $(BUILD_PATH)
 MOVE		= mv $(OBJS) $(BUILD_PATH)
 
-SRC			= exit.c init.c parse.c philo.c routine.c threads.c utils_time.c utils.c
+SRC			= eat_sleep.c exit.c init.c parse.c philo.c routine.c threads.c utils_time.c utils.c
 SRC_PATH	= $(addprefix src/, $(SRC))
 
 HEADER		= -Iheader
@@ -35,9 +35,7 @@ all:		$(NAME)
 	$(CC) $(CFLAGS) $(HEADER) -c $< -o $(<:.c=.o)
 
 $(NAME):	$(OBJS)
-		$(MKDIR)
-		$(MOVE)
-		$(CC) $(CFLAGS) $(MOVE_OBJS_P) -o $@
+		$(CC) $(CFLAGS) $^ -o $@
 		@echo "$(GREEN)<---> Philosophers Compiled! ⌐(ಠ۾ಠ)¬ <--->$(RESET)"
 
 debug:	CFLAGS	+= $(DEBUG) $(SANITIZE)
@@ -45,7 +43,6 @@ debug:	re
 
 clean:
 		$(RM) $(OBJS)
-		$(RM) $(BUILD_PATH)
 
 fclean:	clean
 	$(RM) $(NAME)

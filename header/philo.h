@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ipanos-o <ipanos-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:48:54 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/12 10:56:12 by ipanos-o         ###   ########.fr       */
+/*   Updated: 2023/12/14 09:38:52 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_args
 	int				n_meals;
 	long int		start_time;
 	int				alive;
-	int				full;
 	pthread_mutex_t	writer;
 	pthread_mutex_t	died;
 	pthread_mutex_t	eating;
@@ -56,6 +55,7 @@ typedef struct s_prg
 int			ft_init_prg(t_prg *prg, int argc, char **argv);
 int			ft_philosophers(t_prg *prg);
 void		ft_alive(t_prg *prg);
+int			ft_full(t_prg *prg);
 
 //		PARSE ARGS
 
@@ -72,10 +72,14 @@ int			ft_create_philos(t_prg *prg);
 //		ROUTINE
 
 void		*ft_routine(void *v_philo);
+int			ft_solo_routine(t_philo *philo);
+void		ft_end_routine(t_philo *philo);
+
+//		EAT AND SLEEP ROUTINES
+
 int			ft_philo_sleep(t_philo *philo);
 void		ft_eat(t_philo *philo);
 void		ft_get_fork(t_philo philo);
-void		ft_solo_routine(t_philo *philo);
 
 //		THREADS
 
@@ -92,7 +96,7 @@ int			ft_strncmp(const char *s1, const char *s2, size_t len);
 
 long int	ft_get_time(void);
 void		ft_sleep(long int time_in_ms);
-void		ft_sleep_live(t_philo *philo, long int start_t, long int sleep_t);
+int			ft_cpy_mutex(int origin, pthread_mutex_t *mute);
 
 //		EXIT + ERROR + TEST FUNCTIONS
 

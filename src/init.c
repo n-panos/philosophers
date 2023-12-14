@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:47:50 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/02 10:27:03 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/13 11:08:17 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ int	ft_init_prg(t_prg *prg, int argc, char **argv)
 	i = ft_parse(argv, argc, &prg->args);
 	if (i > 0)
 		return (i);
+	if (ft_init_forks(&(prg->args)) == 1)
+		return (1);
+	if (ft_create_philos(prg) == 1)
+		return (1);
 	i = ft_philosophers(prg);
 	return (i);
 }

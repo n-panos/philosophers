@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:12:03 by ipanos-o          #+#    #+#             */
-/*   Updated: 2023/12/11 19:44:52 by nacho            ###   ########.fr       */
+/*   Updated: 2023/12/14 09:39:06 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	ft_args_to_struct(t_args *args, int argc, char **argv)
 	args->forks = NULL;
 	args->start_time = ft_get_time();
 	args->alive = 0;
-	args->full = 0;
 	pthread_mutex_init(&args->writer, NULL);
 	pthread_mutex_init(&args->died, NULL);
+	pthread_mutex_init(&args->eating, NULL);
 	if (argc == 6)
 		args->n_meals = ft_aredigit_atoi(argv[5]);
 	else
