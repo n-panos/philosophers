@@ -6,7 +6,7 @@
 /*   By: nacho <nacho@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:38:01 by ipanos-o          #+#    #+#             */
-/*   Updated: 2024/02/19 10:57:10 by nacho            ###   ########.fr       */
+/*   Updated: 2024/02/19 11:07:12 by nacho            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	ft_philosophers(t_prg *prg)
 		if (ft_full(prg) == 1)
 			break ;
 		ft_alive(prg);
+		ft_sleep(5);
 	}
 	ft_end_threads(prg->ph);
 	return (0);
@@ -91,6 +92,5 @@ int	ft_full(t_prg *prg)
 	}
 	if (full == prg->args.philos)
 		return (1);
-	ft_sleep(5);
 	return (0);
 }
